@@ -12,141 +12,295 @@
       width: 700px;
     }
   </style>
+
   <div class="chart-wrapper">
     <canvas id="flavourChart"></canvas>
   </div>
 
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js" refer></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" refer></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <script>
-    var flavourCanvas = document.getElementById("flavourChart");
-    var ctxP = flavourCanvas.getContext("2d")
+    const flavourCanvas = document.getElementById("flavourChart");
+    const ctxP = flavourCanvas.getContext("2d");
+    let flag = false;
 
     var flavourData = {
-      datasets: [
-        {
-          pieLabel: [
-            'Cà phê',
-            'Ca cao',
-            'Chocolate',
-            'Brandy',
-            'Bia',
-            'Đậu Phộng',
-            'Hạt phỉ',
-            'Đường cháy',
-            'Bơ',
-            'Chanh',
-            'Cam',
-            'Bưởi',
-            'Anh Đào',
-            'Giấm\nbalsamic',
-            'Balsam',
-            'Bạc hà',
-            'Cam thảo\nLicorice',
-            'Hành Tây\nOnion',
-            'Cà chua\nTomato',
-            'Bí đỏ\nPumpkin',
-            'Bắp cải\nCabbage',
-            'Bắp -Corn',
-            'Tiêu - Pepper',
-            'Đinh hương\nClove',
-            'Ngò\nCoriander',
-            'Gà - Chicken',
-            'Bò - Beef',
-            'Ba rọi xông \nkhói - Bacon',
-            'Cá - Fishy'
-          ],
-          backgroundColor: [
-            '#4774C2', '#4774C2', '#4774C2', '#4774C2', '#4774C2',
-            '#4774C2', '#4774C2', '#4774C2', '#4774C2', '#4774C2',
-            '#4774C2', '#4774C2', '#4774C2', '#4774C2', '#4774C2',
-            '#4774C2', '#EB7D3C', '#EB7D3C', '#EB7D3C', '#EB7D3C',
-            '#EB7D3C', '#EB7D3C', '#EB7D3C', '#EB7D3C', '#EB7D3C',
-            '#EB7D3C', '#EB7D3C', '#EB7D3C', '#EB7D3C'],
-          data: [
-            3.448, 3.448, 3.448, 3.448, 3.448,
-            3.448, 3.448, 3.448, 3.448, 3.448,
-            3.448, 3.448, 3.448, 3.448, 3.448,
-            3.448, 3.448, 3.448, 3.448, 3.448,
-            3.448, 3.448, 3.448, 3.448, 3.448,
-            3.448, 3.448, 3.448, 3.448,
-          ],
-          rotate: [
-            -80, -70, -60, -50, -40,
-            -20, -10, 0, 15, 25,
-            30, 45, 60, 80, 90,
-            -80, -70, -55, -40, -25,
-            -15, 0, 10, 25, 30,
-            45, 55, 70, 86,
-          ],
-          datalabels: {
-            formatter: function (value, context) {
-              return context.dataset.pieLabel[context.dataIndex];
-            },
-            rotation: function (context) {
-              return context.dataset.rotate[context.dataIndex];
-            }
-          }
-        },
-        {
-          pieLabel: ['Coffee, cacao và rượu', 'Bơ, kem và hạt', 'Trái cây', 'Hoa cỏ', 'Rau củ', 'Gia vị - rau mùi', 'Thịt', 'Thủy sản'],
-          backgroundColor: ['#4774C2', '#4774C2', '#4774C2', '#4774C2', '#EB7D3C', '#EB7D3C', '#EB7D3C', '#EB7D3C'],
-          data: [17.24, 13.792, 13.792, 10.344, 20.688, 10.344, 10.344, 3.448],
-          rotate: [30, 90, -50, 0, 45, -70, -20, 85],
-          datalabels: {
-            formatter: function (value, context) {
-              return context.dataset.pieLabel[context.dataIndex];
-            },
-            rotation: function (context) {
-              return context.dataset.rotate[context.dataIndex];
-            }
-          }
-        },
-        {
-          pieLabel: ['Ngọt', 'Mặn'],
-          backgroundColor: ['#4774C2', '#EB7D3C'],
-          data: [55.168, 44.832],
-          datalabels: {
-            formatter: function (value, context) {
-              return context.dataset.pieLabel[context.dataIndex];
-            },
-          }
-        },
-        {
-          pieLabel: ["Try me"],
-          backgroundColor: ['#ffffff'],
-          data: [100],
-          datalabels: {
-            color: '#034A46',
-            anchor: 'start',
-            font: function (context) {
-              var width = context.chart.width;
-              var size = Math.round(width / 30);
-
-              return {
-                weight: 700,
-                size: size
-              };
-            },
-            formatter: function (value, context) {
-              return context.dataset.pieLabel[context.dataIndex];
-            }
+      datasets: [{
+        pieLabel: [
+          'Cà phê',
+          'Ca cao',
+          'Chocolate',
+          'Brandy',
+          'Bia',
+          'Đậu Phộng',
+          'Hạt phỉ',
+          'Đường cháy',
+          'Bơ',
+          'Chanh',
+          'Cam',
+          'Bưởi',
+          'Anh Đào',
+          'Giấm\nbalsamic',
+          'Balsam',
+          'Bạc hà'
+        ],
+        backgroundColor: [
+          '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C',
+          '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C',
+          '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C',
+          '#F2C94C'],
+        data: [
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448
+        ],
+        rotate: [
+          -75, -60, -30, -10, 10,
+          30, 50, 75, 105, -60,
+          -40, -10, 10, 30, 60,
+          80
+        ],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          },
+          rotation: function (context) {
+            return context.dataset.rotate[context.dataIndex];
           }
         }
-      ]
-    };
+      },
+      {
+        pieLabel: [
+          'Cam thảo\nLicorice',
+          'Hành Tây\nOnion',
+          'Cà chua\nTomato',
+          'Bí đỏ\nPumpkin',
+          'Bắp cải\nCabbage',
+          'Bắp -Corn',
+          'Tiêu - Pepper',
+          'Đinh hương\nClove',
+          'Ngò\nCoriander',
+          'Gà - Chicken',
+          'Bò - Beef',
+          'Ba rọi xông \nkhói - Bacon',
+          'Cá - Fishy'
+        ],
+        backgroundColor: [
+          '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB',
+          '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB',
+          '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB'],
+        data: [
+          3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448,
+        ],
+        rotate: [
+          -75, -50, -20, 10,
+          30, 60, 90, -60, -40,
+          0, 20, 50, 80,
+        ],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          },
+          rotation: function (context) {
+            return context.dataset.rotate[context.dataIndex];
+          }
+        }
+      },
+      {
+        pieLabel: ['Coffee, cacao và rượu', 'Bơ, kem và hạt', 'Trái cây', 'Hoa cỏ'],
+        backgroundColor: ['#F2AF4B', '#F2AF4B', '#F2AF4B', '#F2AF4B'],
+        data: [17.24, 13.792, 13.792, 10.344],
+        rotate: [55, -20, 60, -40],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          },
+          rotation: function (context) {
+            return context.dataset.rotate[context.dataIndex];
+          }
+        }
+      },
+      {
+        pieLabel: ['Rau củ', 'Gia vị - rau mùi', 'Thịt', 'Thủy sản'],
+        backgroundColor: ['#A2E4AD', '#A2E4AD', '#A2E4AD', '#A2E4AD'],
+        data: [20.688, 10.344, 10.344, 3.448],
+        rotate: [80, 30, -80, 80],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          },
+          rotation: function (context) {
+            return context.dataset.rotate[context.dataIndex];
+          }
+        }
+      },
+      {
+        pieLabel: ['Ngọt'],
+        backgroundColor: ['#F2994A'],
+        data: [100],
+        datalabels: {
+          color: '#034A46',
+          anchor: 'start',
+          font: function (context) {
+            var width = context.chart.width;
+            var size = Math.round(width / 30);
+
+            return {
+              weight: 700,
+              size: size
+            };
+          },
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          }
+        },
+        borderWidth: 0
+      },
+      {
+        pieLabel: ['Mặn'],
+        backgroundColor: ['#43C6AC'],
+        data: [100],
+        datalabels: {
+          color: '#034A46',
+          anchor: 'start',
+          font: function (context) {
+            var width = context.chart.width;
+            var size = Math.round(width / 30);
+
+            return {
+              weight: 700,
+              size: size
+            };
+          },
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          }
+        },
+        borderWidth: 0
+      },
+      {
+        pieLabel: [
+          'Cà phê',
+          'Ca cao',
+          'Chocolate',
+          'Brandy',
+          'Bia',
+          'Đậu Phộng',
+          'Hạt phỉ',
+          'Đường cháy',
+          'Bơ',
+          'Chanh',
+          'Cam',
+          'Bưởi',
+          'Anh Đào',
+          'Giấm\nbalsamic',
+          'Balsam',
+          'Bạc hà',
+          'Cam thảo\nLicorice',
+          'Hành Tây\nOnion',
+          'Cà chua\nTomato',
+          'Bí đỏ\nPumpkin',
+          'Bắp cải\nCabbage',
+          'Bắp -Corn',
+          'Tiêu - Pepper',
+          'Đinh hương\nClove',
+          'Ngò\nCoriander',
+          'Gà - Chicken',
+          'Bò - Beef',
+          'Ba rọi xông \nkhói - Bacon',
+          'Cá - Fishy'
+        ],
+        backgroundColor: [
+          '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C',
+          '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C',
+          '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C', '#F2C94C',
+          '#F2C94C', '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB',
+          '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB',
+          '#AEFFBB', '#AEFFBB', '#AEFFBB', '#AEFFBB'],
+        data: [
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448, 3.448,
+          3.448, 3.448, 3.448, 3.448,
+        ],
+        rotate: [
+          -80, -70, -60, -50, -40,
+          -20, -10, 0, 15, 25,
+          30, 45, 60, 80, 90,
+          -80, -70, -55, -40, -25,
+          -15, 0, 10, 25, 30,
+          45, 55, 70, 86,
+        ],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          },
+          rotation: function (context) {
+            return context.dataset.rotate[context.dataIndex];
+          }
+        }
+      },
+      {
+        pieLabel: ['Coffee, cacao và rượu', 'Bơ, kem và hạt', 'Trái cây', 'Hoa cỏ', 'Rau củ', 'Gia vị - rau mùi', 'Thịt', 'Thủy sản'],
+        backgroundColor: ['#F2AF4B', '#F2AF4B', '#F2AF4B', '#F2AF4B', '#A2E4AD', '#A2E4AD', '#A2E4AD', '#A2E4AD'],
+        data: [17.24, 13.792, 13.792, 10.344, 20.688, 10.344, 10.344, 3.448],
+        rotate: [30, 90, -50, 0, 45, -70, -20, 85],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          },
+          rotation: function (context) {
+            return context.dataset.rotate[context.dataIndex];
+          }
+        }
+      },
+      {
+        pieLabel: ['Ngọt', 'Mặn'],
+        backgroundColor: ['#F2994A', '#43C6AC'],
+        data: [55.168, 44.832],
+        datalabels: {
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          }
+        }
+      },
+      {
+        pieLabel: ["Try me"],
+        backgroundColor: ['#ffffff'],
+        data: [100],
+        datalabels: {
+          color: '#034A46',
+          anchor: 'start',
+          font: function (context) {
+            var width = context.chart.width;
+            var size = Math.round(width / 30);
+
+            return {
+              weight: 700,
+              size: size
+            };
+          },
+          formatter: function (value, context) {
+            return context.dataset.pieLabel[context.dataIndex];
+          }
+        },
+        borderWidth: 0
+      }
+    ]};
 
     var options = {
       plugins: {
         datalabels: {
-          display: true,
-          color: '#ffffff',
+          color: '#000000',
           anchor: 'center',
           font: function (context) {
             var width = context.chart.width;
-            var size = Math.round(width / 58);
+            var size = Math.round(width / 50);
 
             return {
               size: size
@@ -166,14 +320,52 @@
       options: options,
     });
 
+    const outerArr = [0, 1, 2, 3, 4, 5];
+    const commonArr = [6, 7, 8, 9];
+    const saltArr = [1, 3, 5];
+    const sweetArr = [0, 2, 4];
+
+    function hideSlice(arr) {
+      for (let i = 0; i < arr.length; ++i) {
+        pieChart.hide(arr[i]);
+      }
+    }
+
+    function showSlice(arr) {
+      for (let i = 0; i < arr.length; ++i) {
+        pieChart.show(arr[i]);
+      }
+    }
+
+    hideSlice(outerArr);
 
     flavourCanvas.onclick = function (e) {
       var slice = pieChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
       if (!slice.length) return;
-      var index = slice[0].index;
-      var label = slice[0].element.$datalabels[0].$context.dataset.pieLabel[index];
+      var idx = slice[0].index;
+      var label = slice[0].element.$datalabels[0].$context.dataset.pieLabel[idx];
 
       switch (label) {
+        case 'Mặn':
+          flag = !flag
+          if (flag === true) {
+            showSlice(saltArr);
+            hideSlice(commonArr);
+          } else {
+            hideSlice(saltArr);
+            showSlice(commonArr);
+          }
+          break;
+        case 'Ngọt':
+          flag = !flag
+          if (flag === true) {
+            showSlice(sweetArr);
+            hideSlice(commonArr);
+          } else {
+            hideSlice(sweetArr);
+            showSlice(commonArr);
+          }
+          break;
         case 'Trái cây':
           window.open('https://viet-hong.webflow.io/huong/huong-trai-cay');
           break;
