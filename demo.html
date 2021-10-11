@@ -23,6 +23,10 @@
     const flavourCanvas = document.getElementById("flavourChart");
     const ctxP = flavourCanvas.getContext("2d");
     let flag = false;
+    const outerArr = [0, 1, 2, 3, 4, 5];
+    const commonArr = [6, 7, 8, 9];
+    const saltArr = [1, 3, 5];
+    const sweetArr = [0, 2, 4];
 
     var flavourData = {
       datasets: [{
@@ -319,11 +323,6 @@
       plugins: [ChartDataLabels],
       options: options,
     });
-
-    const outerArr = [0, 1, 2, 3, 4, 5];
-    const commonArr = [6, 7, 8, 9];
-    const saltArr = [1, 3, 5];
-    const sweetArr = [0, 2, 4];
 
     function hideSlice(arr) {
       for (let i = 0; i < arr.length; ++i) {
