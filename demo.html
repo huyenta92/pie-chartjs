@@ -780,14 +780,14 @@
           },
           {
             pieLabel: [
-              "Coffee, cacao và rượu",
-              "Bơ, kem và hạt",
-              "Trái cây",
-              "Hoa cỏ",
-              "Rau củ",
-              "Gia vị - rau mùi",
-              "Thịt",
-              "Thủy sản",
+              "Coffee, cacao và rượu ", // has spacing after
+              "Bơ, kem và hạt ",
+              "Trái cây ",
+              "Hoa cỏ ",
+              "Rau củ ",
+              "Gia vị - rau mùi ",
+              "Thịt ",
+              "Thủy sản ",
             ], //layer 23
             backgroundColor: [
               "#DEBC99",
@@ -921,9 +921,108 @@
               showSlice(commonArr);
             }
             break;
+          // click on first wheel has spacing after
+          case "Coffee, cacao và rượu ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([15, 14]);
+              hideSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+            } else {
+              showSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+              hideSlice([15, 14]);
+            }
+            break;
+          case "Bơ, kem và hạt ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([13, 12]);
+              hideSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+            } else {
+              showSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+              hideSlice([13, 12]);
+            }
+            break;
+          case "Trái cây ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([11, 10]);
+              hideSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+            } else {
+              showSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25,]);
+              hideSlice([11, 10]);
+            }
+            break;
+          case "Hoa cỏ ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([9, 8]);
+              hideSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+            } else {
+              showSlice([ 0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+              hideSlice([9, 8]);
+            }
+            break;
+          case "Rau củ ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([7, 6]);
+              hideSlice([ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+            } else {
+              showSlice([ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+              hideSlice([7, 6]);
+            }
+            break;
+          case "Gia vị - rau mùi ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([5, 4]);
+              hideSlice([ 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+            } else {
+              showSlice([ 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25]);
+              hideSlice([5, 4]);
+            }
+            break;
+          case "Thịt ":
+            flag = !flag;
+            if (flag === true) {
+              showSlice([3, 2]);
+              hideSlice([ 0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21]);
+            } else {
+              showSlice([ 0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21]);
+              hideSlice([3, 2]);
+            }
+            break;
+          case "Thủy sản ":
+            debugger
+            flag = !flag;
+            if (flag === true) {
+              showSlice([1, 0]);
+              hideSlice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21]);
+            } else {
+              showSlice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21]);
+              hideSlice([1, 0]);
+            }
+            break;
+            // click on first wheel
           case "Coffee, cacao và rượu":
             flag = !flag;
-            if (flag === false) {
+            if (flag === true) {
               showSlice([15, 14]);
               hideSlice(sweetArr);
             } else {
